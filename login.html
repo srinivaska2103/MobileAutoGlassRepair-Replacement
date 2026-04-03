@@ -82,19 +82,37 @@
                                class="w-full px-5 py-4 bg-white/50 dark:bg-gray-900/50 border border-gray-200 dark:border-gray-700 rounded-2xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all dark:text-white">
                     </div>
 
-                    <div class="space-y-2">
-                        <label class="text-sm font-bold text-gray-700 dark:text-gray-300 ml-1">Password</label>
-                        <input type="password" placeholder="••••••••" 
-                               class="w-full px-5 py-4 bg-white/50 dark:bg-gray-900/50 border border-gray-200 dark:border-gray-700 rounded-2xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all dark:text-white">
-                        
-                        <div class="flex items-center justify-between mt-2 px-1">
-                            <label class="flex items-center gap-2 cursor-pointer group">
-                                <input type="checkbox" class="w-4 h-4 rounded border-gray-300 text-primary focus:ring-primary">
-                                <span class="text-xs font-bold text-gray-500 group-hover:text-primary transition-colors">Remember me</span>
-                            </label>
-                            <a href="#" class="text-xs font-bold text-primary hover:underline">Forgot Password?</a>
-                        </div>
-                    </div>
+                    <div class="space-y-2" x-data="{ showPassword: false }">
+    <label class="text-sm font-bold text-gray-700 dark:text-gray-300 ml-1">Password</label>
+    
+    <div class="relative group">
+        <input :type="showPassword ? 'text' : 'password'" 
+               placeholder="••••••••" 
+               class="w-full px-5 py-4 bg-white/50 dark:bg-gray-900/50 border border-gray-200 dark:border-gray-700 rounded-2xl focus:ring-2 focus:ring-primary/20 focus:border-primary outline-none transition-all dark:text-white pr-14">
+        
+        <button type="button" 
+                @click="showPassword = !showPassword" 
+                class="absolute right-4 top-1/2 -translate-y-1/2 p-2 text-gray-400 hover:text-primary transition-colors focus:outline-none">
+            
+            <svg x-show="!showPassword" xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+            </svg>
+
+            <svg x-show="showPassword" x-cloak xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.542-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l18 18" />
+            </svg>
+        </button>
+    </div>
+
+    <div class="flex items-center justify-between mt-2 px-1">
+        <label class="flex items-center gap-2 cursor-pointer group">
+            <input type="checkbox" class="w-4 h-4 rounded border-gray-300 text-primary focus:ring-primary">
+            <span class="text-xs font-bold text-gray-500 group-hover:text-primary transition-colors">Remember me</span>
+        </label>
+        <a href="#" class="text-xs font-bold text-primary hover:underline">Forgot Password?</a>
+    </div>
+</div>
 
                     <button class="w-full py-4 bg-primary hover:bg-blue-600 text-white rounded-2xl font-black text-lg shadow-xl shadow-primary/30 transform hover:-translate-y-0.5 active:scale-95 transition-all">
                         Log In
@@ -117,11 +135,11 @@
                             <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
                         </svg>
                     </button>
-                    <button class="p-4 rounded-2xl bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all shadow-sm">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M12 0C5.373 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.6.113.793-.261.793-.577v-2.234c-3.338.726-4.042-1.416-4.042-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
-                        </svg>
-                    </button>
+                  <button class="p-4 rounded-2xl bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-all shadow-sm group">
+    <svg class="w-6 h-6 text-gray-900 dark:text-white transition-colors" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.039 2.48-4.5 2.597-4.571-1.428-2.09-3.623-2.324-4.402-2.376-2.13-.156-3.896 1.104-4.998 1.104zm1.883-4.078c.96-1.17 1.597-2.792 1.416-4.416-1.391.052-3.078.922-4.078 2.09-.896 1.039-1.675 2.701-1.467 4.26 1.545.117 3.143-.805 4.129-1.934z"/>
+    </svg>
+</button>
                 </div>
 
                 <p class="text-center mt-8 text-sm font-bold text-gray-500">
