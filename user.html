@@ -67,12 +67,7 @@
             </nav>
 
             <div class="p-4 border-t border-slate-100 dark:border-gray-800 space-y-2">
-                <div class="flex gap-2">
-                    <button @click="toggleDark()" class="flex-1 p-2 bg-slate-100 dark:bg-gray-800 rounded-lg flex justify-center hover:bg-slate-200 dark:hover:bg-gray-700 transition-colors">
-                        <span x-text="darkMode ? '☀️' : '🌙'"></span>
-                    </button>
-                    <button @click="toggleRtl()" class="flex-1 p-2 bg-slate-100 dark:bg-gray-800 rounded-lg text-[10px] font-black hover:bg-slate-200 dark:hover:bg-gray-700 transition-colors" x-text="isRtl ? 'LTR' : 'RTL'"></button>
-                </div>
+            
                 <a href="login.html">
                     <button class="w-full flex items-center gap-3 px-4 py-3 text-red-500 font-bold hover:bg-red-50 dark:hover:bg-red-900/10 rounded-xl transition-all">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
@@ -98,9 +93,7 @@
                     </a>
                
                 <div class="flex items-center gap-3">
-                    <button @click="toggleDark()" class="p-2 bg-slate-100 dark:bg-gray-800 rounded-xl">
-                        <span x-text="darkMode ? '☀️' : '🌙'"></span>
-                    </button>
+                    
                     <button @click="mobileMenu = true" class="p-2 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-gray-800 rounded-xl">
                         <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/></svg>
                     </button>
@@ -140,10 +133,7 @@
                 </nav>
 
                 <div class="mt-auto pt-10 space-y-4">
-                    <div class="grid grid-cols-2 gap-3">
-                        <button @click="toggleRtl()" class="p-4 bg-slate-100 dark:bg-gray-800 rounded-2xl text-center font-black text-xs uppercase" x-text="isRtl ? 'LTR' : 'RTL'"></button>
-                        <button @click="toggleDark()" class="p-4 bg-slate-100 dark:bg-gray-800 rounded-2xl text-center font-black text-xs uppercase" x-text="darkMode ? 'Light' : 'Dark'"></button>
-                    </div>
+                   
                     <a href="login.html">
                                             <button class="w-full p-5 bg-red-50 dark:bg-red-900/10 text-red-500 rounded-2xl font-black text-lg">Logout</button>
 
@@ -154,15 +144,38 @@
 
         <main class="flex-grow p-4 md:p-8 lg:p-12 mt-20 xl:mt-0 transition-all duration-300">
             
-            <header class="flex justify-between items-center mb-10">
-                <div>
-                    <h1 class="text-2xl md:text-3xl lg:text-4xl font-black tracking-tight" x-text="getWelcomeMessage()"></h1>
-                    <p class="text-slate-500 dark:text-slate-400 text-sm md:text-base font-medium">Manage your auto glass repairs</p>
-                </div>
-                <div class="hidden sm:flex items-center gap-4">
-                    <div class="w-12 h-12 bg-primary rounded-2xl flex items-center justify-center text-white font-black shadow-lg shadow-primary/20">JD</div>
-                </div>
-            </header>
+         <header class="flex flex-wrap md:flex-nowrap justify-between items-center gap-4 mb-10">
+    <!-- 1. Left Side: Welcome Text -->
+    <div class="order-1">
+        <h1 class="text-2xl md:text-3xl lg:text-4xl font-semibold tracking-tight text-gray-900 dark:text-white" x-text="getWelcomeMessage()"></h1>
+        <p class="text-slate-500 dark:text-slate-400 text-xs md:text-base font-bold uppercase tracking-wider">Manage your repairs</p>
+    </div>
+
+    <!-- 2. Right Side: Actions (Buttons & Profile) -->
+    <div class="order-2 flex items-center gap-3 ml-auto">
+        <!-- Toggles: Visible on ALL layouts -->
+        <div class="flex bg-slate-100 dark:bg-gray-800 p-1 rounded-xl border border-slate-200 dark:border-gray-700">
+            <button @click="toggleDark()" 
+                    class="p-2 w-10 h-10 flex items-center justify-center rounded-lg hover:bg-white dark:hover:bg-gray-700 transition-all shadow-sm">
+                <span x-text="darkMode ? '☀️' : '🌙'"></span>
+            </button>
+            
+            <button @click="toggleRtl()" 
+                    class="p-2 px-3 flex items-center justify-center rounded-lg text-[10px] font-black hover:bg-white dark:hover:bg-gray-700 transition-all" 
+                    x-text="isRtl ? 'LTR' : 'RTL'">
+            </button>
+        </div>
+
+        <!-- User Profile Avatar: Now visible on mobile too -->
+        <div class="relative group">
+            <div class="w-10 h-10 md:w-12 md:h-12 bg-primary rounded-xl md:rounded-2xl flex items-center justify-center text-white font-black shadow-lg shadow-primary/20 transform group-hover:scale-105 transition-transform">
+                JD
+            </div>
+            <!-- Online Indicator -->
+            <div class="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 border-2 border-white dark:border-gray-950 rounded-full"></div>
+        </div>
+    </div>
+</header>
   <div x-show="activeTab === 'home'" 
      x-cloak 
      class="animate-fade-in h-full lg:h-[calc(100vh-140px)] flex flex-col gap-6 lg:overflow-hidden">
